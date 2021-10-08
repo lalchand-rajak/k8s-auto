@@ -47,21 +47,21 @@ pipeline {
                 }
             }
         }
-    //     stage('k8s deploy'){
-    //     steps {
-    //         sshagent(['k8s deploy']) {
-    //         sh "scp -o StrictHostKeyChecking=no testk8s.yml root@10.210.0.133:/root"
-    //             script{
-    //                      try{
-    //                     sh "ssh root@10.210.0.133 kubectl apply -f testk8s.yml"
-    //                       }catch(error){
-    //                    sh " ssh root@10.210.0.133 kubectl create -f testk8s.yml"
-    //                         }
+        stage('k8s deploy'){
+        steps {
+            sshagent(['k8s deploy']) {
+            sh "scp -o StrictHostKeyChecking=no k8s-auto.yml root@10.210.0.133:/root"
+                script{
+                         try{
+                        sh "ssh root@10.210.0.133 kubectl apply -f k8s-auto.yml"
+                          }catch(error){
+                       sh " ssh root@10.210.0.133 kubectl create -f k8s-auto.yml"
+                            }
     
-    //                 }
-    //         }
-    //      }
-    //    }
+                    }
+            }
+         }
+       }
 
     }
     post {
