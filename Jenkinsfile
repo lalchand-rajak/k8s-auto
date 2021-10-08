@@ -66,8 +66,8 @@ pipeline {
        stage('deleting yaml'){
        steps{
        sshagent(['k8s deploy']){
-       sh 'cd /root'
-       sh 'rm -rf k8s-auto.yml'
+       sh 'sudo cd /root'
+       sh 'sudo rm -rf k8s-auto.yml'
              } 
             }
        }
