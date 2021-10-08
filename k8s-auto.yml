@@ -11,7 +11,7 @@ spec:
     #tier: frontend
   type: NodePort
   ports:
-    - port: 11050               #container port
+    - port: 8080              #container port
       targetPort: 11050           #Pod port
       #nodePort: 31802     #If type is NodePort then use nodePort   
 ---
@@ -23,15 +23,15 @@ metadata:
   labels: 
     app: test-app   
 spec: 
-  replicas: 1
+  replicas: 2
   selector: 
     matchLabels: 
       app: test-app
       #tier: frontend
   strategy:
-    type: Recreate
+    type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
+      maxSurge: 1
       maxUnavailable: 1
   minReadySeconds: 5
   revisionHistoryLimit: 10
@@ -44,9 +44,10 @@ spec:
     spec:
       containers: 
         - image: lalchandrajak05/myapp:latest
+          imagePullPolicy: Always
           name: test-app
-#         ports:
-#         - containerPort: 8080
+          ports:
+            - containerPort: 8080
 #          readinessProbe:
 #            tcpSocket:
 #              port: 7071
