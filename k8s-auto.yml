@@ -1,30 +1,48 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-app
+  labels: 
+    app: test-app
+spec:
+  selector:
+    app: test-app
+    #tier: frontend
+  type: NodePort
+  ports:
+    - port: 8080               #container port
+      targetPort: 8080           #Pod port
+      nodePort: 31802     #If type is NodePort then use nodePort   
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-app
   namespace: k8s
-  labels:
-    app: test-app
-spec:
-  replicas: 4
-  selector:
-    matchLabels:
+  labels: 
+    app: test-app   
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
       app: test-app
+      #tier: frontend
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
-  minReadySeconds: 5
-  revisionHistoryLimit: 10
-  template:
-    metadata:
-      labels:
+      maxSurge: 1
+      maxUnavailable: 33%
+  template: 
+    metadata: 
+      labels: 
         app: test-app
+        #tier: frontend
+      name: test-app
     spec:
-      containers:
-        - name: test-app
-          image: lalchandrajak05/myapp:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
+      containers: 
+        - image: lalchandrajak05/myapp:latest
+          name: test-app
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "10.210.0.133"
