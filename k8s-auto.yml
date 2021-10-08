@@ -23,11 +23,18 @@ metadata:
   labels: 
     app: test-app   
 spec: 
-  replicas: 2
+  replicas: 1
   selector: 
     matchLabels: 
       app: test-app
       #tier: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  minReadySeconds: 5
+  revisionHistoryLimit: 10
   template: 
     metadata: 
       labels: 
