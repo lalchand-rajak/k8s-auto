@@ -63,14 +63,14 @@ pipeline {
          }
        }
 
-       stage('deleting yaml'){
-       steps{
-       sshagent(['k8s deploy']){
-       sh 'rm -rf /root/k8s-auto.yml'
+       #stage('deleting yaml'){
+       #steps{
+       #sshagent(['k8s deploy']){
+       #sh 'rm -rf /root/k8s-auto.yml'
       
-             } 
-            }
-       }
+             #} 
+           # }
+      # }
 
     }
     post {
