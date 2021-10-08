@@ -12,9 +12,9 @@ spec:
       app: test-app
   strategy:
     type: Recreate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+    #rollingUpdate:
+    #  maxSurge: 1
+     # maxUnavailable: 1
   template:
     metadata:
       labels:
