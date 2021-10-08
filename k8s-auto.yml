@@ -10,11 +10,13 @@ spec:
   selector:
     matchLabels:
       app: test-app
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+minReadySeconds: 5
+revisionHistoryLimit: 10
   template:
     metadata:
       labels:
