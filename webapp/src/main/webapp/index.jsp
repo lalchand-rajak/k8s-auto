@@ -1,2 +1,2 @@
-<h1> Auto deployment K8s sucessfull </h1>
+<h1> Auto deployment K8s sucessfull 2.0 v </h1>
 
