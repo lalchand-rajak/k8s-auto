@@ -1,80 +1,27 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: test-app
-  labels: 
-    app: test-app
-spec:
-  selector:
-    app: test-app
-    #tier: frontend
-  type: NodePort
-  ports:
-    - port: 8080              #container port
-      targetPort: 8080           #Pod port
-      #nodePort: 31802     #If type is NodePort then use nodePort   
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-app
   namespace: k8s
-  labels: 
-    app: test-app   
-spec: 
-  replicas: 2
-  selector: 
-    matchLabels: 
-      app: test-app
-      #tier: frontend
+  labels:
+    app: test-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go
   strategy:
-    type: Recreate
-#    rollingUpdate:
-#      maxSurge: 1
-#      maxUnavailable: 1
-#  minReadySeconds: 5
- # revisionHistoryLimit: 10
-  template: 
-    metadata: 
-      labels: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 33%
+  template:
+    metadata:
+      labels:
         app: test-app
-        #tier: frontend
-      name: test-app
     spec:
-      containers: 
-        - image: lalchandrajak05/myapp:latest
-          imagePullPolicy: Always
-          name: test-app
+      containers:
+        - name: test-app
+          image: lalchandrajak05/myapp:latest
           ports:
             - containerPort: 8080
-#          readinessProbe:
-#            tcpSocket:
-#              port: 7071
-#            initialDelaySeconds: 30
-#            periodSeconds: 15
-#          livenessProbe:
-#            tcpSocket:
-#               port: 7071
-#            initialDelaySeconds: 60
-#            periodSeconds: 15
-#            failureThreshold: 5
-#            timeoutSeconds: 5
-#          resources:
-#            requests:
-#              memory: "64Mi"
-#              cpu: "250m"
-#            limits:
-#              memory: "128Mi"
-#              cpu: "500m" 		  
-#          ports: 
-#           - containerPort: 80
-          #env:
-          #- name: SPRING_PROFILES_ACTIVE
-            #value: "sit-secured"
-#      nodeSelector:
-#	   size:medium	
-      #dnsConfig:
-       # searches:
-        #  - ecgc.svc.cluster.local
-          #- ecgcbackend.svc.cluster.local
