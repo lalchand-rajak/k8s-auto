@@ -41,7 +41,7 @@ spec:
       name: test-app
     spec:
       containers: 
-        - image: lalchandrajak05/myapp:latest
+        - image: lalchandrajak05/myapp
           name: test-app
           env:
           - name: SPRING_PROFILES_ACTIVE
