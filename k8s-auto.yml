@@ -13,7 +13,7 @@ spec:
   ports:
     - port: 11050               #container port
       targetPort: 11050           #Pod port
-      nodePort: 31802     #If type is NodePort then use nodePort   
+      #nodePort: 31802     #If type is NodePort then use nodePort   
 ---
 apiVersion: apps/v1
 kind: Deployment
