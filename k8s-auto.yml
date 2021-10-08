@@ -12,7 +12,7 @@ spec:
   type: NodePort
   ports:
     - port: 8080              #container port
-      targetPort: 11050           #Pod port
+      targetPort: 8080           #Pod port
       #nodePort: 31802     #If type is NodePort then use nodePort   
 ---
 apiVersion: apps/v1
