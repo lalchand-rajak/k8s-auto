@@ -49,7 +49,7 @@ pipeline {
         }
         stage('k8s deploy'){
         steps {
-           // sshagent(['k8s deploy']) {
+           sshagent(['k8s deploy']) {
             sh "scp -o StrictHostKeyChecking=no test-app.yml root@10.210.0.133:/root"
                 script{
                          //try{
@@ -59,7 +59,7 @@ pipeline {
                          //   }
     
                     }
-            //}
+            }
          }
        }
 
