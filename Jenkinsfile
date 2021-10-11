@@ -55,7 +55,7 @@ pipeline {
                          //try{
                         sh "ssh root@10.210.0.133 kubectl apply -f k8s-auto.yml"
                         //  }catch(error){
-                       sh "ssh root@10.210.0.133 kubectl rollout restart deployment.v1.apps/k8s-auto"
+                       sh "ssh root@10.210.0.133 kubectl rollout restart deployment test-app"
                          //   }
     
                     }
