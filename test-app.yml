@@ -13,7 +13,7 @@ spec:
   ports:
     - port: 8080               #container port
       targetPort: 8080           #Pod port
-      nodePort: 31802     #If type is NodePort then use nodePort   
+      #nodePort: 31802     #If type is NodePort then use nodePort   
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,6 +44,6 @@ spec:
         - image: lalchandrajak05/myapp
           name: test-app
           imagePullPolicy: Always
-          env:
-          - name: SPRING_PROFILES_ACTIVE
-            value: "10.210.0.133"
+          ##env:
+          #- name: SPRING_PROFILES_ACTIVE
+          #  value: "10.210.0.133"
