@@ -52,18 +52,16 @@ pipeline {
             sshagent(['k8s deploy']) {
             sh "scp -o StrictHostKeyChecking=no k8s-auto.yml root@10.210.0.133:/root"
                 script{
-                         try{
+                         //try{
                         sh "ssh root@10.210.0.133 kubectl apply -f k8s-auto.yml"
-                          }catch(error){
-                       sh " ssh root@10.210.0.133 kubectl create -f k8s-auto.yml"
-                            }
+                        //  }catch(error){
+                       sh " ssh root@10.210.0.133 kubectl rollout restart -f k8s-auto.yml"
+                         //   }
     
                     }
             }
          }
        }
-
-      
 
     }
     post {
